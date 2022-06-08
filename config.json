@@ -1,0 +1,17 @@
+{
+	"runtime": {
+		
+	},
+	"web-protocols": {
+		"http": {
+			"enabled": true,
+			"port": 3000
+		},
+		"https": {
+			"enabled": true,
+			"port": 3001,
+			"certificate": "./certs/cert.pem",
+			"private_key": "./certs/key.pem"
+		}
+	}
+}
