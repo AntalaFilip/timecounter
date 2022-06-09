@@ -24,7 +24,7 @@ const data = {
 /** how many REAL ms since last data update */
 const realDiff = () => Math.abs(Date.now() - data.elapsed);
 /** how many TRUE ms since last data update */
-const trueDiff = () => realDiff * data.speedModifier;
+const trueDiff = () => realDiff() * data.speedModifier;
 /** how many TRUE ms passed from start */
 const trueMs = () => data.trueElapsed + trueDiff();
 /** Current TRUE date, according to startPoint */
