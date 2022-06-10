@@ -1,5 +1,5 @@
 {
-  "name": "tiemcounter-server",
+  "name": "timecounter-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "Filip Antala",
   "license": "ISC",
   "dependencies": {
+    "@socket.io/admin-ui": "^0.3.0",
     "express": "^4.18.1",
     "socket.io": "^4.5.1"
   }

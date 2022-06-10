@@ -8,6 +8,9 @@ config.json
 
 # dependencies
 /node_modules
+/web/node_modules
+
+
 /.pnp
 .pnp.js
 
