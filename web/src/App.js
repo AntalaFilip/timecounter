@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import { motion } from 'framer-motion';
 import useInterval from './useInterval';
 
-const socket = io('http://localhost:3015');
+const socket = io();
 
 function App() {
 	const [state, setState] = useState();

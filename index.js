@@ -16,6 +16,8 @@ const io = new Server(server, {
 });
 instrument(io, { auth: false });
 
+app.use(Express.static('./web/build'));
+
 
 const interface = createTerminalInterface(io);
 
