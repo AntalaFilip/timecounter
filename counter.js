@@ -25,7 +25,7 @@ class Counter {
     this._startPoint = this.loadData.startPoint ?? Date.now();
     this._speedModifier = this.loadData.speedModifier || 1;
     this._elapsed = Date.now();
-    this._trueElapsed = 0;
+    this._trueElapsed = this.loadData.trueElapsed ?? 0;
     this.password = this.loadData.password;
 
     this.statusMessage();
