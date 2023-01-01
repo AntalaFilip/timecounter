@@ -9,6 +9,7 @@ const app = Express();
 const config = require("./config.json");
 const server = http.createServer(app).listen(config.port);
 const { instrument } = require("@socket.io/admin-ui");
+const bcrypt = require("bcrypt");
 const io = new Server(server, {
   cors: {
     origin: config.origins,
@@ -19,7 +20,7 @@ instrument(io, {
   auth: {
     type: "basic",
     username: config.adminAuth.username,
-    password: config.adminAuth.password,
+    password: bcrypt.hashSync(config.adminAuth.password, 10),
   },
 });
 
