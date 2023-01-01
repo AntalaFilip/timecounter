@@ -77,6 +77,38 @@ io.on("connection", (socket) => {
 
     ack(counter.metadata());
   });
+
+  socket.on("pause", (ctr, pwd, ack) => {
+    const counter = Counter.get(ctr);
+    if (!counter) ack(null);
+
+    if (pwd === counter.password) {
+      counter.running = !counter.running;
+      ack(true);
+    } else {
+      ack(false);
+    }
+  });
+
+  socket.on("speed", (ctr, pwd, speed, ack) => {
+    const counter = Counter.get(ctr);
+    if (!counter) ack(null);
+
+    if (pwd === counter.password && typeof speed === "number") {
+      counter.speedModifier = speed;
+      ack(true);
+    } else {
+      ack(false);
+    }
+  });
+
+  socket.on("authenticate", (ctr, pwd, ack) => {
+    const counter = Counter.get(ctr);
+    if (!counter) ack(null);
+
+    if (pwd === counter.password) ack(true);
+    else ack(false);
+  });
 });
 
 console.log(`Ready!`);

@@ -27,32 +27,11 @@ class Counter {
     this._elapsed = Date.now();
     this._trueElapsed = 0;
     this.password = this.loadData.password;
-    this.registerHandlers();
 
     this.statusMessage();
     io.emit("newCounter", this.name);
     this.save(false);
     counters.set(this.name, this);
-  }
-
-  registerHandlers() {
-    this.io.on("pause", (pwd, ack) => {
-      if (pwd === this.password) {
-        this.running = !this.running;
-        ack(true);
-      } else {
-        ack(false);
-      }
-    });
-
-    this.io.on("speed", (pwd, speed, ack) => {
-      if (pwd === this.password && typeof speed === "number") {
-        this.speedModifier = speed;
-        ack(true);
-      } else {
-        ack(false);
-      }
-    });
   }
 
   /** how many REAL ms since last data update */
@@ -130,6 +109,7 @@ class Counter {
       speedModifier: this.speedModifier,
       elapsed: this._elapsed,
       trueElapsed: this._trueElapsed,
+      password: this.password,
     };
   }
 
