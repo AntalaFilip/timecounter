@@ -6,16 +6,16 @@ const http = require("http");
 const { createTerminalInterface } = require("./terminal");
 const Counter = require("./counter");
 const app = Express();
-const server = http.createServer(app).listen(3015);
+const config = require("./config.json");
+const server = http.createServer(app).listen(config.port);
 const { instrument } = require("@socket.io/admin-ui");
 const io = new Server(server, {
   cors: {
-    origin: ["https://admin.socket.io", "http://localhost:3000"],
+    origin: config.origins,
     credentials: true,
   },
 });
 instrument(io, { auth: false });
-const config = require("./config.json");
 
 app.use(Express.static("./web/build"));
 

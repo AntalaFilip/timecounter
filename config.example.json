@@ -1,4 +1,8 @@
 {
 	"instanceName": "name here",
-	"motd": null
+	"motd": null,
+	"port": 3015,
+	"origins": [
+		"https://admin.socket.io"
+	]
 }
