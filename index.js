@@ -15,6 +15,7 @@ const io = new Server(server, {
   },
 });
 instrument(io, { auth: false });
+const config = require("./config.json");
 
 app.use(Express.static("./web/build"));
 
@@ -26,6 +27,7 @@ if (!fs.existsSync(p.join(__dirname, "data"))) {
 const dataDir = fs
   .readdirSync(p.join(__dirname, "data"), { withFileTypes: true })
   .filter((dir) => dir.isFile());
+
 dataDir.forEach((dataFile) => {
   if (!dataFile.name.endsWith(".json")) return;
   const data = require(`./data/${dataFile.name}`);
@@ -37,9 +39,16 @@ dataDir.forEach((dataFile) => {
 });
 
 io.on("connection", (socket) => {
-  socket.emit("HELLO", { counters: Counter.counters.keys() });
+  socket.emit("HELLO", {
+    counters: Counter.counters.keys(),
+    name: config.instanceName,
+    motd: config.motd,
+  });
   socket.on("counters", (ack) => {
     ack({ counters: Array.from(Counter.counters.keys()) });
+  });
+  socket.on("config", (ack) => {
+    ack({ name: config.instanceName, motd: config.motd });
   });
 
   socket.on("subscribe", (ctr, ack) => {
