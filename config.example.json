@@ -4,5 +4,9 @@
 	"port": 3015,
 	"origins": [
 		"https://admin.socket.io"
-	]
+	],
+	"adminAuth": {
+		"username": "admin",
+		"password": "1234"
+	}
 }

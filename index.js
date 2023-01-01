@@ -15,7 +15,13 @@ const io = new Server(server, {
     credentials: true,
   },
 });
-instrument(io, { auth: false });
+instrument(io, {
+  auth: {
+    type: "basic",
+    username: config.adminAuth.username,
+    password: config.adminAuth.password,
+  },
+});
 
 app.use(Express.static("./web/build"));
 
