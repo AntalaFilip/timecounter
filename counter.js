@@ -58,7 +58,7 @@ class Counter {
    * @param {boolean} bool
    */
   set running(bool) {
-    this.save();
+    this.save(false);
     this._running = bool;
     this.save();
   }
@@ -70,7 +70,7 @@ class Counter {
    * @param {number} num
    */
   set speedModifier(num) {
-    this.save();
+    this.save(false);
     this._speedModifier = num;
     this.save();
   }
@@ -82,7 +82,7 @@ class Counter {
    * @param {number} num
    */
   set startPoint(num) {
-    this.save();
+    this.save(false);
     this._startPoint = num;
     this.save();
   }

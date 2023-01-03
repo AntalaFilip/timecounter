@@ -102,6 +102,21 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("set time", (ctr, pwd, newDate, ack) => {
+    const counter = Counter.get(ctr);
+    if (!counter) ack(null);
+
+    if (pwd === counter.password && typeof newDate === "string") {
+      counter.running = false;
+      counter._trueElapsed = 0;
+      const ms = new Date(newDate).getTime();
+      counter.startPoint = ms;
+      ack(true);
+    } else {
+      ack(false);
+    }
+  });
+
   socket.on("authenticate", (ctr, pwd, ack) => {
     const counter = Counter.get(ctr);
     if (!counter) ack(null);

@@ -41,6 +41,7 @@ function App() {
   const [settingsMenu, setSettingsMenu] = useState();
   const [authenticated, setAuthenticated] = useState(false);
   const [newTimeSpeed, setNewTimeSpeed] = useState(1);
+  const [newTime, setNewTime] = useState(DateTime.now());
 
   const closeModal = () => {
     setError();
@@ -132,7 +133,6 @@ function App() {
   }, 50);
 
   const sopts = socket.io.opts;
-  console.log(state);
 
   if (!show) {
     return (
@@ -358,6 +358,56 @@ function App() {
             </form>
           </ModalDialog>
         </Modal>
+        <Modal open={modal === "time"} onClose={() => closeModal()}>
+          <ModalDialog>
+            <ModalClose />
+            <Typography level="h5" mb="0.25rem">
+              Set new time
+            </Typography>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setLoading(true);
+                socket.emit(
+                  "set time",
+                  show,
+                  password,
+                  newTime.toISO(),
+                  (ack) => {
+                    setLoading(false);
+                    if (ack === true) {
+                      closeModal();
+                    } else if (ack === false) {
+                      setAuthenticated(false);
+                      setError("Invalid password!");
+                    } else {
+                      setAuthenticated(false);
+                      setError(`An error has occurred`);
+                    }
+                  }
+                );
+              }}
+            >
+              <Stack spacing={2}>
+                <TextField
+                  type="number"
+                  label="New time"
+                  value={newTime}
+                  onChange={(e) =>
+                    setNewTime(DateTime.fromMillis(Number(e.target.value)))
+                  }
+                  autoFocus
+                  required
+                  error={Boolean(error)}
+                  helperText={error}
+                />
+                <Button loading={loading} type="submit">
+                  Set new time
+                </Button>
+              </Stack>
+            </form>
+          </ModalDialog>
+        </Modal>
         <Menu
           size="sm"
           variant="soft"
@@ -430,6 +480,15 @@ function App() {
           >
             <span class="material-symbols-outlined">schedule</span>&nbsp;Change
             time speed
+          </MenuItem>
+          <MenuItem
+            disabled={!authenticated || loading}
+            onClick={() => {
+              setModal("time");
+              setSettingsMenu();
+            }}
+          >
+            <span class="material-symbols-outlined">update</span>&nbsp;Set time
           </MenuItem>
         </Menu>
       </>
