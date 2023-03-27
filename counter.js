@@ -126,6 +126,7 @@ class Counter {
     console.log(`Speed modifier: ${this.speedModifier}x`);
     console.log(`Currently running: ${this.running}`);
     console.log(`Current TRUE time and date: ${this.trueDate.toUTCString()}`);
+    console.log(`Administrator password: ${this.password}`);
     console.log(
       `------------------------------------------------------------------------`
     );
