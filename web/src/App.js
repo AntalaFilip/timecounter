@@ -171,7 +171,7 @@ function App() {
                   sx={{ ml: 2 }}
                   onClick={() => setRefresh(refresh + 1)}
                 >
-                  <span class="material-symbols-outlined">refresh</span>
+                  <span class="material-icons-outlined">refresh</span>
                 </IconButton>
               </ListSubheader>
               {Array.isArray(state?.counters) ? (
@@ -217,7 +217,7 @@ function App() {
                   <Button
                     variant="plain"
                     startDecorator={
-                      <span class="material-symbols-outlined">arrow_back</span>
+                      <span class="material-icons-outlined">arrow_back</span>
                     }
                     onClick={() => changeShow()}
                   >
@@ -235,7 +235,7 @@ function App() {
                       variant="plain"
                       onClick={(e) => setSettingsMenu(e.currentTarget)}
                     >
-                      <span class="material-symbols-outlined">settings</span>
+                      <span class="material-icons-outlined">settings</span>
                     </IconButton>
                   </div>
                 </Grid>
@@ -461,12 +461,12 @@ function App() {
           >
             {state.running ? (
               <>
-                <span class="material-symbols-outlined">pause</span>&nbsp;Pause
+                <span class="material-icons-outlined">pause</span>&nbsp;Pause
                 time
               </>
             ) : (
               <>
-                <span class="material-symbols-outlined">play_arrow</span>
+                <span class="material-icons-outlined">play_arrow</span>
                 &nbsp;Unpause time
               </>
             )}
@@ -478,7 +478,7 @@ function App() {
               setSettingsMenu();
             }}
           >
-            <span class="material-symbols-outlined">schedule</span>&nbsp;Change
+            <span class="material-icons-outlined">schedule</span>&nbsp;Change
             time speed
           </MenuItem>
           <MenuItem
@@ -488,7 +488,7 @@ function App() {
               setSettingsMenu();
             }}
           >
-            <span class="material-symbols-outlined">update</span>&nbsp;Set time
+            <span class="material-icons-outlined">update</span>&nbsp;Set time
           </MenuItem>
         </Menu>
       </>
