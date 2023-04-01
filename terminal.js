@@ -58,7 +58,8 @@ function handleCommand(io, input, local = true) {
 		}
 		else if (args[1] === 'create') {
 			const speed = Number(args[2]) || 1;
-			const startPoint = Number(args[3]) || Date.now();
+			const spinput = Number(args[3]);
+			const startPoint = Number.isNaN(spinput) ? Date.now() : spinput;
 			const password = args[4] || crypto.randomBytes(4).toString('hex');
 
 			const createdCounter = new Counter(args[0], io, { speedModifier: speed, startPoint, password });
